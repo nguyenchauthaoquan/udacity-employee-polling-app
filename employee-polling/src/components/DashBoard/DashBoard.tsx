@@ -13,11 +13,11 @@ const DashBoard: FC<DashBoardProps> = (props: DashBoardProps) => {
 
     return (
         <>
-            <Row>
+            <Row data-testid="dashboard">
                 <Col md={12}>
                     <Card>
                         <Card.Header className={"text-center"}>
-                            <Card.Title data-testid="dashboard-heading">New Questions</Card.Title>
+                            <Card.Title>New Questions</Card.Title>
                         </Card.Header>
                         <Card.Body>
                             <Container>

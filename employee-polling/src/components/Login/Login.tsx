@@ -21,6 +21,9 @@ const Login: FC<LoginProps> = (props: LoginProps) => {
         props.login(username, password)
 
         navigate("/home")
+
+        setUsername("")
+        setPassword("")
     }
 
     return (

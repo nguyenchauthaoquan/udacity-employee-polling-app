@@ -1,9 +1,12 @@
-import {render} from "@testing-library/react";
+import {fireEvent, render} from "@testing-library/react";
 import {Provider} from "react-redux";
 import {store} from "../src/store/store";
 import {BrowserRouter} from "react-router-dom";
 import Layout from "../src/components/Layout/Layout";
-import {authenticateUserAction} from "../src/actions/actions";
+import {authenticateUserAction, getAppData} from "../src/actions/actions";
+import Home from "../src/components/Home/Home";
+import LeaderBoard from "../src/components/LeaderBoard/LeaderBoard";
+import NewPoll from "../src/components/NewPoll/NewPoll";
 
 describe("Layout Component", () => {
     it("should be rendered successfully", () => {
@@ -46,5 +49,103 @@ describe("Layout Component", () => {
 
         expect(component).toBeDefined();
         expect(usernameElement).toBeInTheDocument();
+        expect(usernameElement.textContent).toBe("sarahedo")
+    })
+    it ("should have the logout button", async () => {
+        store.dispatch(authenticateUserAction({id: "sarahedo", password: "123456"}))
+        const component = render(
+            <Provider store={store}>
+                <BrowserRouter>
+                    <Layout/>
+                </BrowserRouter>
+            </Provider>
+        );
+
+        const logoutElement = component.getByTestId("logout-btn");
+        expect(component).toBeDefined();
+        expect(logoutElement).toBeInTheDocument();
+        expect(logoutElement.textContent).toBe("Log out")
+    })
+
+    it ("should click the logout button successfully", async () => {
+        store.dispatch(authenticateUserAction({id: "sarahedo", password: "123456"}))
+        const component = render(
+            <Provider store={store}>
+                <BrowserRouter>
+                    <Layout/>
+                </BrowserRouter>
+            </Provider>
+        );
+
+        const logoutElement = component.getByTestId("logout-btn");
+        expect(component).toBeDefined();
+        expect(logoutElement).toBeInTheDocument();
+        expect(logoutElement.textContent).toBe("Log out")
+        fireEvent.click(logoutElement)
+    })
+
+})
+
+describe("Home component", () => {
+    it("should render the dashboard component", () => {
+        store.dispatch(authenticateUserAction({id: "sarahedo", password: "123456"}))
+        store.dispatch(getAppData())
+
+        const component = render(
+            <Provider store={store}>
+                <BrowserRouter>
+                    <Layout>
+                        <Home />
+                    </Layout>
+                </BrowserRouter>
+            </Provider>
+        );
+        const dashboardElement = component.getByTestId("dashboard")
+
+        expect(component).toBeDefined();
+        expect(dashboardElement).toBeInTheDocument();
+    })
+})
+
+describe("Leaderboard Component", async () => {
+    it("should render the leaderboard table", () => {
+        store.dispatch(authenticateUserAction({id: "sarahedo", password: "123456"}))
+        store.dispatch(getAppData())
+
+        const component = render(
+            <Provider store={store}>
+                <BrowserRouter>
+                    <Layout>
+                        <LeaderBoard />
+                    </Layout>
+                </BrowserRouter>
+            </Provider>
+        );
+        const leaderboardElement = component.getByTestId("leaderboard-table")
+
+        expect(component).toBeDefined();
+        expect(leaderboardElement).toBeInTheDocument();
+    })
+})
+
+describe("NewPoll Component", () => {
+    it("should render the create poll form", async () => {
+        store.dispatch(authenticateUserAction({id: "sarahedo", password: "123456"}))
+        store.dispatch(getAppData())
+
+        const component = render(
+            <Provider store={store}>
+                <BrowserRouter>
+                    <Layout>
+                        <NewPoll />
+                    </Layout>
+                </BrowserRouter>
+            </Provider>
+        );
+
+        const newPollElement = component.getByTestId("new-poll")
+
+        expect(component).toBeDefined();
+        expect(newPollElement).toBeInTheDocument();
     })
 })

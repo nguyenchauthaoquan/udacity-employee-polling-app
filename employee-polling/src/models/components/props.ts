@@ -48,3 +48,8 @@ export type LayoutProps = {
 export type ErrorBoundaryProps = {
     children: ReactNode;
 }
+
+export type PrivateRouteProps = {
+    authenticated: boolean;
+    children?: ReactNode;
+}

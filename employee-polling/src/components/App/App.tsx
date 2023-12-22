@@ -13,6 +13,7 @@ import {Action} from "../../models/components/action.ts";
 import User from "../../models/data/user.ts";
 import Layout from "../Layout/Layout.tsx";
 import PollPage from "../PollPage/PollPage.tsx";
+import PrivateRoute from "../PrivateRoute/PrivateRoute.tsx";
 
 const App: FC<AppProps> = (props: AppProps) => {
     useEffect(() => {
@@ -22,10 +23,10 @@ const App: FC<AppProps> = (props: AppProps) => {
       <Layout>
           <Routes>
               <Route path={"/"} element={<Login/>}/>
-              <Route path={"home"} element={<Home/>}/>
-              <Route path={"leaderboard"} element={<LeaderBoard/>}/>
-              <Route path={"new"} element={<NewPoll />}/>
-              <Route path={"home/question/:id"} element={<PollPage />}/>
+              <Route path={"home"} element={<PrivateRoute><Home/></PrivateRoute>}/>
+              <Route path={"leaderboard"} element={<PrivateRoute><LeaderBoard/></PrivateRoute>}/>
+              <Route path={"new"} element={<PrivateRoute><NewPoll /></PrivateRoute>}/>
+              <Route path={"home/question/:id"} element={<PrivateRoute><PollPage /></PrivateRoute>}/>
           </Routes>
       </Layout>
   )

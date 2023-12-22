@@ -78,5 +78,7 @@ describe("Login", () => {
         expect(passwordInputElement.value).toBe("wrongpassword");
         fireEvent.click(submitButtonElement); // User stays on page
         expect(loginHeadingElement).toBeInTheDocument();
+        expect(usernameInputElement.value).toBe("");
+        expect(passwordInputElement.value).toBe("");
     });
 })

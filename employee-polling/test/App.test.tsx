@@ -42,10 +42,7 @@ describe("Login Component", () => {
 
 describe("Layout Component", () => {
     it("should show navbar when logged in successfully", () => {
-        store.dispatch(authenticateUserAction({
-            id: "",
-            password: ""
-        }))
+        store.dispatch(authenticateUserAction({id: "sarahedo", password: "123456"}))
 
         const renderedComponent = render(
             <ErrorBoundary>

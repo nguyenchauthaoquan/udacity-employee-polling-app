@@ -21,7 +21,7 @@ const NewPoll: FC<NewPollProps> = (props: NewPollProps) => {
     }
 
     return (
-        <Container>
+        <Container data-testid="new-poll">
             <Row>
                 <Col md={12} className={"text-center"}>
                     <h3>Would you rather</h3>

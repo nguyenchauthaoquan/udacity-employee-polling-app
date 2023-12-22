@@ -45,7 +45,7 @@ const Layout: FC<LayoutProps> = (props: LayoutProps) => {
                                     </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Button variant={"secondary"} onClick={() => handleLogout()}>Log out</Button>
+                                    <Button data-testid="logout-btn" variant={"secondary"} onClick={() => handleLogout()}>Log out</Button>
                                 </Nav.Item>
                             </Nav>
                         </Col>
