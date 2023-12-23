@@ -17,7 +17,7 @@ const DashBoard: FC<DashBoardProps> = (props: DashBoardProps) => {
                 <Col md={12}>
                     <Card>
                         <Card.Header className={"text-center"}>
-                            <Card.Title>New Questions</Card.Title>
+                            <Card.Title>Unanswered Questions</Card.Title>
                         </Card.Header>
                         <Card.Body>
                             <Container>
@@ -52,7 +52,7 @@ const DashBoard: FC<DashBoardProps> = (props: DashBoardProps) => {
                 <Col md={12}>
                     <Card>
                         <Card.Header className={"text-center"}>
-                            <Card.Title>Done</Card.Title>
+                            <Card.Title>Answered Questions</Card.Title>
                         </Card.Header>
                         <Card.Body>
                             <Container>
