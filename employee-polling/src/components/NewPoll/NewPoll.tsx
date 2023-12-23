@@ -35,16 +35,16 @@ const NewPoll: FC<NewPollProps> = (props: NewPollProps) => {
             <Row>
                 <Col md={12}>
                     <Form onSubmit={(event: FormEvent<HTMLFormElement>) => handleSubmit(event)}>
-                        <Form.Group className="mb-3" controlId="username">
-                            <Form.Label>First Option</Form.Label>
-                            <Form.Control type="text" value={optionOne} onChange={(event: ChangeEvent<HTMLInputElement>) => setOptionOne(event.target.value)} placeholder="Option One" />
+                        <Form.Group className="mb-3" controlId="first-option">
+                            <Form.Label data-testid={"first-option-label"}>First Option</Form.Label>
+                            <Form.Control data-testid={"first-option-input"} type="text" value={optionOne} onChange={(event: ChangeEvent<HTMLInputElement>) => setOptionOne(event.target.value)} placeholder="Option One" />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="password">
-                            <Form.Label>Second Option</Form.Label>
-                            <Form.Control type="text" value={optionTwo} onChange={(event: ChangeEvent<HTMLInputElement>) => setOptionTwo(event.target.value)} placeholder="Option Two" />
+                        <Form.Group className="mb-3" controlId="second-option">
+                            <Form.Label data-testid={"second-option-label"}>Second Option</Form.Label>
+                            <Form.Control data-testid={"second-option-input"} type="text" value={optionTwo} onChange={(event: ChangeEvent<HTMLInputElement>) => setOptionTwo(event.target.value)} placeholder="Option Two" />
                         </Form.Group>
-                        <Button variant="light" type="submit">
+                        <Button variant="light" type="submit" data-testid={"poll-submit-btn"}>
                             Submit
                         </Button>
                     </Form>

@@ -33,3 +33,31 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+# Project execution tutorial
+## Run the application
+
+1. Clone the github repository:
+``` git clone https://github.com/nguyenchauthaoquan/udacity-employee-polling-app.git ```
+
+2. Run the application:
+if the project directory don't install all packages, please run:
+``` 
+cd employee-polling
+npm install
+```
+then start the application in employee-polling folder:
+```
+npm start
+```
+## Execute the testing for application
+
+if the project directory don't have the 
+```
+cd employee-polling
+npm install
+```
+then start the testing execution in employee-polling folder:
+```
+npm test
+```

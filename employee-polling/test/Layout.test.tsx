@@ -103,6 +103,7 @@ describe("Home component", () => {
         const dashboardElement = component.getByTestId("dashboard")
 
         expect(component).toBeDefined();
+        expect(component).toMatchSnapshot();
         expect(dashboardElement).toBeInTheDocument();
     })
 })
@@ -124,6 +125,7 @@ describe("Leaderboard Component", async () => {
         const leaderboardElement = component.getByTestId("leaderboard-table")
 
         expect(component).toBeDefined();
+        expect(component).toMatchSnapshot();
         expect(leaderboardElement).toBeInTheDocument();
     })
 })
@@ -146,6 +148,27 @@ describe("NewPoll Component", () => {
         const newPollElement = component.getByTestId("new-poll")
 
         expect(component).toBeDefined();
+        expect(component).toMatchSnapshot();
         expect(newPollElement).toBeInTheDocument();
+
+        const firstOptionLabelElement = component.getByTestId("first-option-label");
+        const firstOptionInputElement = component.getByTestId("first-option-input");
+        const secondOptionLabelElement = component.getByTestId("second-option-label");
+        const secondOptionInputElement = component.getByTestId("second-option-input");
+        const submitButtonElement = component.getByTestId("poll-submit-btn");
+
+        expect(firstOptionLabelElement).toBeInTheDocument();
+        expect(firstOptionLabelElement.textContent).toBe("First Option");
+        fireEvent.change(firstOptionInputElement, {target: {value: 'A'}});
+        expect(firstOptionInputElement.value).toBe("A");
+
+        expect(secondOptionLabelElement).toBeInTheDocument();
+        expect(secondOptionLabelElement.textContent).toBe("Second Option");
+        fireEvent.change(secondOptionInputElement, {target: {value: 'B'}});
+        expect(secondOptionInputElement.value).toBe("B");
+
+        expect(submitButtonElement).toBeInTheDocument();
+        expect(submitButtonElement.textContent).toBe("Submit");
+        fireEvent.click(submitButtonElement)
     })
 })
