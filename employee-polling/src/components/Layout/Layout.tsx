@@ -20,6 +20,7 @@ const Layout: FC<LayoutProps> = (props: LayoutProps) => {
     }
 
     return (
+
         <Container>
             {props.user && (
                 <>
@@ -33,7 +34,7 @@ const Layout: FC<LayoutProps> = (props: LayoutProps) => {
                                     <Link to={"/leaderboard"}>Leaderboard</Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Link to={"/new"}>New</Link>
+                                    <Link to={"/add"}>New</Link>
                                 </Nav.Item>
                             </Nav>
                         </Col>

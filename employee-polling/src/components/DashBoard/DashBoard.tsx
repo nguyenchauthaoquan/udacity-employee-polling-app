@@ -26,7 +26,7 @@ const DashBoard: FC<DashBoardProps> = (props: DashBoardProps) => {
                                         props.questions?.filter((question: Question) => props.user && !question.optionOne.votes.includes(props.user.id)
                                             && !question.optionTwo.votes.includes(props.user.id)).map((question: Question) =>
                                             <Col md={4} className={"mt-2"} key={question.id}>
-                                                <Link to={`question/${question.id}`}>
+                                                <Link to={`/question/${question.id}`}>
                                                     <Card>
                                                         <Card.Body>
                                                             <Card.Title className={"text-center"}>{question.author}</Card.Title>
@@ -61,7 +61,7 @@ const DashBoard: FC<DashBoardProps> = (props: DashBoardProps) => {
                                         props.questions?.filter((question: Question) => props.user && (question.optionOne.votes.includes(props.user.id)
                                             || question.optionTwo.votes.includes(props.user.id))).map((question: Question) =>
                                             <Col md={4} className={"mt-2"} key={question.id}>
-                                                <Link to={`question/${question.id}`}>
+                                                <Link to={`/question/${question.id}`}>
                                                     <Card>
                                                         <Card.Body>
                                                             <Card.Title className={"text-center"}>{question.author}</Card.Title>

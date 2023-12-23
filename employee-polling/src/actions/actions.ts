@@ -89,6 +89,11 @@ export function handleLogin(username: string, password: string) {
 
         if (user) {
             return dispatch(authenticateUserAction(user));
+        } else {
+            return dispatch(authenticateUserAction({
+                user: null,
+                errorMessage: "Wrong username or password"
+            }))
         }
     };
 }

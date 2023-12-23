@@ -14,6 +14,7 @@ import User from "../../models/data/user.ts";
 import Layout from "../Layout/Layout.tsx";
 import PollPage from "../PollPage/PollPage.tsx";
 import PrivateRoute from "../PrivateRoute/PrivateRoute.tsx";
+import PageNotFound from "../PageNotFound/PageNotFound.tsx";
 
 const App: FC<AppProps> = (props: AppProps) => {
     useEffect(() => {
@@ -22,11 +23,12 @@ const App: FC<AppProps> = (props: AppProps) => {
   return (
       <Layout>
           <Routes>
-              <Route path={"/"} element={<Login/>}/>
+              <Route path={"/"} index={true} element={<Login/>}/>
               <Route path={"home"} element={<PrivateRoute><Home/></PrivateRoute>}/>
               <Route path={"leaderboard"} element={<PrivateRoute><LeaderBoard/></PrivateRoute>}/>
-              <Route path={"new"} element={<PrivateRoute><NewPoll /></PrivateRoute>}/>
-              <Route path={"home/question/:id"} element={<PrivateRoute><PollPage /></PrivateRoute>}/>
+              <Route path={"add"} element={<PrivateRoute><NewPoll /></PrivateRoute>}/>
+              <Route path={"question/:id"} element={<PrivateRoute><PollPage /></PrivateRoute>}/>
+              <Route path={"*"} element={<PageNotFound />}/>
           </Routes>
       </Layout>
   )

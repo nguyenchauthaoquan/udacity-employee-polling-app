@@ -7,7 +7,7 @@ import Question from "../../models/data/question.ts";
 import {ThunkDispatch} from "redux-thunk";
 import {reducer} from "../../reducers/reducer.ts";
 import {Action} from "../../models/components/action.ts";
-import {Button, Col, Row} from "react-bootstrap";
+import {Button, Col, ProgressBar, Row} from "react-bootstrap";
 import User from "../../models/data/user.ts";
 
 const PollPage: FC<PollPageProps> = (props: PollPageProps) => {
@@ -26,25 +26,40 @@ const PollPage: FC<PollPageProps> = (props: PollPageProps) => {
         navigate("/home")
     }
 
+    const calculatePercentage = (option: string, question: Question) => {
+        const numberVotesTotal = question.optionOne.votes.length + question.optionTwo.votes.length;
+
+        switch (option) {
+            case "optionOne":
+                return question.optionOne.votes.length / numberVotesTotal * 100 + " %";
+            case "optionTwo":
+                return question.optionTwo.votes.length / numberVotesTotal * 100 + " %";
+            default:
+                return "";
+        }
+    };
+
     const hasVotedForOptionOne = props.user && question.optionOne.votes.includes(props.user?.id);
     const hasVotedForOptionTwo = props.user && question.optionTwo.votes.includes(props.user?.id);
     const hasVoted = hasVotedForOptionOne || hasVotedForOptionTwo;
 
     return (
-        <>
-            <Row>
-                <Col md={12} className={"text-center"}>
-                    <h3>Poll by {user?.id}</h3>
-                </Col>
-                <Col md={12} className={"d-flex justify-content-center"}>
-                    <img src={user?.avatarURL} alt="logo" width={100} height={100}/>
-                </Col>
-                <Col md={6}>
-                    <Button disabled={hasVoted} variant={hasVotedForOptionOne ? "success" : ""} onClick={handleQuestionOne}>{question.optionOne.text}</Button>
-                    <Button disabled={hasVoted} variant={hasVotedForOptionTwo ? "success" : ""} onClick={handleQuestionTwo}>{question.optionTwo.text}</Button>
-                </Col>
-            </Row>
-        </>
+        <Row>
+            <Col md={12} className={"text-center"}>
+                <h3>Poll by {user?.id}</h3>
+            </Col>
+            <Col md={12} className={"d-flex justify-content-center"}>
+                <img src={user?.avatarURL} alt="logo" width={100} height={100}/>
+            </Col>
+            <Col md={6}>
+                <Button disabled={hasVoted} variant={hasVotedForOptionOne ? "success" : ""} onClick={handleQuestionOne}>
+                    {question.optionOne.text} {hasVoted && <><p>{question.optionOne.votes.length}</p><p>{calculatePercentage("optionOne", question)}</p></>}
+                </Button>
+                <Button disabled={hasVoted} variant={hasVotedForOptionTwo ? "success" : ""} onClick={handleQuestionTwo}>
+                    {question.optionTwo.text} {hasVoted && <><p>{question.optionTwo.votes.length}</p><p>{calculatePercentage("optionTwo", question)}</p></>}
+                </Button>
+            </Col>
+        </Row>
     );
 };
 
