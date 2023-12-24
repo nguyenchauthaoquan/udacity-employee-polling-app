@@ -27,7 +27,8 @@ const App: FC<AppProps> = (props: AppProps) => {
               <Route path={"home"} element={<PrivateRoute><Home/></PrivateRoute>}/>
               <Route path={"leaderboard"} element={<PrivateRoute><LeaderBoard/></PrivateRoute>}/>
               <Route path={"add"} element={<PrivateRoute><NewPoll /></PrivateRoute>}/>
-              <Route path={"question/:id"} element={<PrivateRoute><PollPage /></PrivateRoute>}/>
+              <Route path={"question/:id"} element={<PollPage />}/>
+              <Route path={"notfound"} element={<PageNotFound />}/>
               <Route path={"*"} element={<PageNotFound />}/>
           </Routes>
       </Layout>

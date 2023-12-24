@@ -1,13 +1,13 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import {PollPageProps} from "../../models/components/props.ts";
 import {connect} from "react-redux";
 import {handleSaveAnswerQuestion} from "../../actions/actions.ts";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import Question from "../../models/data/question.ts";
 import {ThunkDispatch} from "redux-thunk";
 import {reducer} from "../../reducers/reducer.ts";
 import {Action} from "../../models/components/action.ts";
-import {Button, Col, ProgressBar, Row} from "react-bootstrap";
+import {Alert, Button, Col, Row} from "react-bootstrap";
 import User from "../../models/data/user.ts";
 
 const PollPage: FC<PollPageProps> = (props: PollPageProps) => {
@@ -15,6 +15,25 @@ const PollPage: FC<PollPageProps> = (props: PollPageProps) => {
     const param = useParams();
 
     const question = Object.values(props.questions as Record<string, Question>).find((question: Question) => question.id === param.id) as Question;
+
+    const [showAlert, setShowAlert] = useState<boolean>(!question)
+
+    const handleCloseAlert = () => {
+        setShowAlert(false);
+
+        navigate("/notfound")
+    }
+
+    if (showAlert) {
+        return (
+            <Alert show={showAlert} onClose={() => handleCloseAlert()} variant={"danger"} dismissible>
+                <Alert.Heading>Error!</Alert.Heading>
+                <p>Poll is not found, click <Link to={"/"}>here</Link> to return to login page or close this alert to
+                    continue.</p>
+            </Alert>
+        )
+    }
+
     const user = Object.values(props.users as Record<string, User>).find((user: User) => user.id === question.author) as User
 
     const handleQuestionOne = () => {
