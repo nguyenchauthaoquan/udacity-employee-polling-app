@@ -28,7 +28,7 @@ const Layout: FC<LayoutProps> = (props: LayoutProps) => {
                         <Col md={6}>
                             <Nav variant={"underline"} activeKey={window.location.pathname} data-testid="navbar">
                                 <Nav.Item>
-                                    <Link to={"/home"}>Home</Link>
+                                    <Link to={"/"}>Home</Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                     <Link to={"/leaderboard"}>Leaderboard</Link>

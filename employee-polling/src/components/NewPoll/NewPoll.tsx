@@ -17,7 +17,7 @@ const NewPoll: FC<NewPollProps> = (props: NewPollProps) => {
         event.preventDefault();
         props.addQuestion(optionOne, optionTwo);
 
-        navigate("/home")
+        navigate("/")
     }
 
     return (

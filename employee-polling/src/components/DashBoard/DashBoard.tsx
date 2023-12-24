@@ -14,35 +14,7 @@ const DashBoard: FC<DashBoardProps> = (props: DashBoardProps) => {
     return (
         <Row data-testid="dashboard">
             <Col md={12}>
-                <Tabs defaultActiveKey={"answered"} className="mb-3" fill>
-                    <Tab title={"Answered Questions"} eventKey={"answered"}>
-                        <Container>
-                            <Row>
-                                {
-                                    props.questions?.filter((question: Question) => props.user && (question.optionOne.votes.includes(props.user.id)
-                                        || question.optionTwo.votes.includes(props.user.id))).map((question: Question) =>
-                                        <Col md={4} className={"mt-2"} key={question.id}>
-                                            <Link to={`/question/${question.id}`}>
-                                                <Card>
-                                                    <Card.Body>
-                                                        <Card.Title
-                                                            className={"text-center"}>{question.author}</Card.Title>
-                                                        <Card.Text className={"text-center"}>
-                                                            {moment(question.timestamp).format("hh:mm:A | DD/MM/YYYY")}
-                                                        </Card.Text>
-                                                    </Card.Body>
-                                                    <Card.Footer>
-                                                        <Button variant={"outline-success"} className={"d-block w-100"}
-                                                                onClick={() => navigate(`/question/${question.id}`)}>Show</Button>
-                                                    </Card.Footer>
-                                                </Card>
-                                            </Link>
-                                        </Col>
-                                    )
-                                }
-                            </Row>
-                        </Container>
-                    </Tab>
+                <Tabs defaultActiveKey={"unanswered"} className="mb-3" fill>
                     <Tab title={"Unanswered Questions"} eventKey={"unanswered"}>
                         <Container>
                             <Row>
@@ -57,6 +29,34 @@ const DashBoard: FC<DashBoardProps> = (props: DashBoardProps) => {
                                                             className={"text-center"}>{question.author}</Card.Title>
                                                         <Card.Text className={"text-center"}>
                                                             {moment(question.timestamp).format("hh:mm:A | MM/DD/YYYY")}
+                                                        </Card.Text>
+                                                    </Card.Body>
+                                                    <Card.Footer>
+                                                        <Button variant={"outline-success"} className={"d-block w-100"}
+                                                                onClick={() => navigate(`/question/${question.id}`)}>Show</Button>
+                                                    </Card.Footer>
+                                                </Card>
+                                            </Link>
+                                        </Col>
+                                    )
+                                }
+                            </Row>
+                        </Container>
+                    </Tab>
+                    <Tab title={"Answered Questions"} eventKey={"answered"}>
+                        <Container>
+                            <Row>
+                                {
+                                    props.questions?.filter((question: Question) => props.user && (question.optionOne.votes.includes(props.user.id)
+                                        || question.optionTwo.votes.includes(props.user.id))).map((question: Question) =>
+                                        <Col md={4} className={"mt-2"} key={question.id}>
+                                            <Link to={`/question/${question.id}`}>
+                                                <Card>
+                                                    <Card.Body>
+                                                        <Card.Title
+                                                            className={"text-center"}>{question.author}</Card.Title>
+                                                        <Card.Text className={"text-center"}>
+                                                            {moment(question.timestamp).format("hh:mm:A | DD/MM/YYYY")}
                                                         </Card.Text>
                                                     </Card.Body>
                                                     <Card.Footer>

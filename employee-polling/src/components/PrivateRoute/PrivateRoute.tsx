@@ -1,22 +1,14 @@
-import {FC, useState} from 'react';
+import {FC} from 'react';
 import {PrivateRouteProps} from "../../models/components/props.ts";
 import {reducer} from "../../reducers/reducer.ts";
 import {connect} from "react-redux";
-import {Alert} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
 const PrivateRoute: FC<PrivateRouteProps> = (props: PrivateRouteProps) => {
-    const [showAlert, setShowAlert] = useState<boolean>(!props.authenticated);
-
-    const handleCloseAlert = () => {
-        setShowAlert(false);
-    }
-
+    const redirectUrl = window.location.href.toString().split(window.location.host)[1];
+    console.log(redirectUrl)
     return  props.authenticated ? props.children :  (
-        <Alert variant="danger" show={showAlert} onClose={handleCloseAlert} dismissible>
-            <Alert.Heading>Error!</Alert.Heading>
-            <p>Please login before access to this page, click <Link to={"/"}>here</Link> to return to login page.</p>
-        </Alert>
+        <Navigate to={`/login?redirectTo=${redirectUrl}`} />
     );
 };
 

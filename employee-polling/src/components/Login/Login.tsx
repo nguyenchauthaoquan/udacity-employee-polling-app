@@ -1,7 +1,7 @@
 import {ChangeEvent, FC, FormEvent, useState} from 'react';
 import {LoginProps} from "../../models/components/props.ts";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {handleLogin} from "../../actions/actions.ts";
 import {ThunkDispatch} from "redux-thunk";
@@ -9,16 +9,19 @@ import {reducer} from "../../reducers/reducer.ts";
 import {Action} from "../../models/components/action.ts";
 
 const Login: FC<LoginProps> = (props: LoginProps) => {
-    const navigate = useNavigate();
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+
+    if (props.authenticated) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectUrl = urlParams.get('redirectTo');
+        return <Navigate to={redirectUrl ? redirectUrl : "/"}/>;
+    }
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         props.login(username, password)
-
-        navigate("/home");
 
         setUsername("");
         setPassword("");
